@@ -98,8 +98,8 @@ private:
     ShareUserGroupWidget *_userGroupWidget = nullptr;
     QProgressIndicator *_progressIndicator = nullptr;
     
-    QWidget *_scrollAreaLinksViewPort = nullptr;
-    QVBoxLayout *_scrollAreaLinksLayout = nullptr;
+    QWidget *_scrollAreaViewPort = nullptr;
+    QVBoxLayout *_scrollAreaLayout = nullptr;
 };
 
 } // namespace OCC
