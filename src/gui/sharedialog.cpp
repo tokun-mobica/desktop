@@ -327,7 +327,6 @@ void ShareDialog::showSharingUi()
         connect(this, &ShareDialog::styleChanged, _userGroupWidget, &ShareUserGroupWidget::slotStyleChanged);
 
         _ui->verticalLayout->insertWidget(1, _userGroupWidget);
-        _userGroupWidget->getShares();
     }
 
     if (theme->linkSharing()) {
