@@ -251,9 +251,15 @@ void ShareUserGroupWidget::slotSharesFetched(const QList<QSharedPointer<Share>> 
 {
     int x = 0;
     QList<QString> linkOwners({});
-
+    
     ShareUserLine *justCreatedShareThatNeedsPassword = nullptr;
-
+       
+    QLayoutItem *shareUserLine;
+    while ((shareUserLine = _shareUserGroup->takeAt(0)) != nullptr) {
+        delete shareUserLine->widget();
+        delete shareUserLine;
+    }
+    
     foreach (const auto &share, shares) {
         // We don't handle link shares, only TypeUser or TypeGroup
         if (share->getShareType() == Share::TypeLink) {
@@ -279,7 +285,6 @@ void ShareUserGroupWidget::slotSharesFetched(const QList<QSharedPointer<Share>> 
 
         // Connect styleChanged events to our widget, so it can adapt (Dark-/Light-Mode switching)
         connect(this, &ShareUserGroupWidget::styleChanged, s, &ShareUserLine::slotStyleChanged);
-
         _shareUserGroup->addWidget(s);
 
         if (!_lastCreatedShareId.isEmpty() && share->getId() == _lastCreatedShareId) {
