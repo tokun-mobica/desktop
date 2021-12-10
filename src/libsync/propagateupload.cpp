@@ -392,7 +392,7 @@ void PropagateUploadFileCommon::slotStartUpload(const QByteArray &transmissionCh
         return slotOnErrorStartFolderUnlock(SyncFileItem::SoftError, tr("File Removed (start upload) %1").arg(fullFilePath));
     }
     if (_item->_modtime <= 0) {
-        slotOnErrorStartFolderUnlock(SyncFileItem::NormalError, tr("File %1 has invalid modified time. Do not upload to the server.").arg(QDir::toNativeSeparators(_item->_file)));
+        slotOnErrorStartFolderUnlock(SyncFileItem::NormalError, tr("File %1 has invalid modification time. Do not upload to the server.").arg(QDir::toNativeSeparators(_item->_file)));
         return;
     }
     Q_ASSERT(_item->_modtime > 0);
@@ -405,7 +405,7 @@ void PropagateUploadFileCommon::slotStartUpload(const QByteArray &transmissionCh
 
     _item->_modtime = FileSystem::getModTime(originalFilePath);
     if (_item->_modtime <= 0) {
-        slotOnErrorStartFolderUnlock(SyncFileItem::NormalError, tr("File %1 has invalid modified time. Do not upload to the server.").arg(QDir::toNativeSeparators(_item->_file)));
+        slotOnErrorStartFolderUnlock(SyncFileItem::NormalError, tr("File %1 has invalid modification time. Do not upload to the server.").arg(QDir::toNativeSeparators(_item->_file)));
         return;
     }
     Q_ASSERT(_item->_modtime > 0);
