@@ -251,7 +251,7 @@ void ShareUserGroupWidget::slotSharesFetched(const QList<QSharedPointer<Share>> 
 {
     int x = 0;
     QList<QString> linkOwners({});
-    
+
     ShareUserLine *justCreatedShareThatNeedsPassword = nullptr;
        
     QLayoutItem *shareUserLine;

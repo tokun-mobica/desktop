@@ -188,7 +188,7 @@ ShareLinkWidget *ShareDialog::addLinkShareWidget(const QSharedPointer<LinkShare>
     //linkShareWidget->setBackgroundRole(_scrollAreaLinksLayout->count() % 2 == 0 ? QPalette::Base : QPalette::AlternateBase);
     
     linkShareWidget->setupUiOptions();
-     
+
     return linkShareWidget;
 }
 
@@ -201,7 +201,7 @@ void ShareDialog::initLinkShareWidget()
         connect(_emptyShareLinkWidget, &ShareLinkWidget::createLinkShare, this, &ShareDialog::slotCreateLinkShare);
 
         connect(_emptyShareLinkWidget, &ShareLinkWidget::createPassword, this, &ShareDialog::slotCreatePasswordForLinkShare);
-        
+
         _ui->verticalLayout->insertWidget(_linkWidgetList.size()+1, _emptyShareLinkWidget);
         _scrollAreaLayout->addWidget(_emptyShareLinkWidget);
         _emptyShareLinkWidget->show();
@@ -240,7 +240,7 @@ void ShareDialog::slotSharesFetched(const QList<QSharedPointer<Share>> &shares)
         QSharedPointer<LinkShare> linkShare = qSharedPointerDynamicCast<LinkShare>(share);
         addLinkShareWidget(linkShare);
     }
-    
+
     initLinkShareWidget();
     slotAdjustScrollWidgetSize();
     emit toggleShareLinkAnimation(false);
@@ -324,7 +324,7 @@ void ShareDialog::showSharingUi()
         _ui->verticalLayout->insertWidget(1, _userGroupWidget);
         _scrollAreaLayout->addLayout(_userGroupWidget->shareUserGroupLayout());
     }
-    
+
     if (theme->linkSharing()) {
         if(_manager) {
             _manager->fetchShares(_sharePath);
