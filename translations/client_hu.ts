@@ -891,38 +891,38 @@ Ez a művelet megszakítja a jelenleg futó szinkronizálást.</translation>
         <translation>Fájl eltávolítva (feltöltés indítása) %1</translation>
     </message>
     <message>
-        <location filename="../src/libsync/bulkpropagatorjob.cpp" line="279"/>
-        <source>Local file has invalid modified time. Do not upload to the server.</source>
-        <translation type="unfinished"/>
+        <location filename="../src/libsync/bulkpropagatorjob.cpp" line="280"/>
+        <source>File %1 has invalid modified time. Do not upload to the server.</source>
+        <translation>A(z) %1 fájl módosítási ideje érvénytelen. Ne töltse fel a kiszolgálóra.</translation>
     </message>
     <message>
-        <location filename="../src/libsync/bulkpropagatorjob.cpp" line="284"/>
+        <location filename="../src/libsync/bulkpropagatorjob.cpp" line="286"/>
         <source>Local file changed during syncing. It will be resumed.</source>
         <translation>A helyi fájl megváltozott a szinkronizálás során. Folytatva lesz.</translation>
     </message>
     <message>
-        <location filename="../src/libsync/bulkpropagatorjob.cpp" line="295"/>
-        <location filename="../src/libsync/bulkpropagatorjob.cpp" line="621"/>
+        <location filename="../src/libsync/bulkpropagatorjob.cpp" line="298"/>
+        <location filename="../src/libsync/bulkpropagatorjob.cpp" line="624"/>
         <source>Local file changed during sync.</source>
         <translation>A helyi fájl megváltozott szinkronizálás közben.</translation>
     </message>
     <message>
-        <location filename="../src/libsync/bulkpropagatorjob.cpp" line="425"/>
+        <location filename="../src/libsync/bulkpropagatorjob.cpp" line="428"/>
         <source>Error updating metadata: %1</source>
         <translation>Hiba a metaadatok frissítésekor: %1</translation>
     </message>
     <message>
-        <location filename="../src/libsync/bulkpropagatorjob.cpp" line="428"/>
+        <location filename="../src/libsync/bulkpropagatorjob.cpp" line="431"/>
         <source>The file %1 is currently in use</source>
         <translation>A(z) %1 fájl épp használatban van</translation>
     </message>
     <message>
-        <location filename="../src/libsync/bulkpropagatorjob.cpp" line="604"/>
+        <location filename="../src/libsync/bulkpropagatorjob.cpp" line="607"/>
         <source>The local file was removed during sync.</source>
         <translation>A helyi fájl el lett távolítva szinkronizálás közben.</translation>
     </message>
     <message>
-        <location filename="../src/libsync/bulkpropagatorjob.cpp" line="651"/>
+        <location filename="../src/libsync/bulkpropagatorjob.cpp" line="654"/>
         <source>; Restoration Failed: %1</source>
         <translation>; Sikertelen helyreállítás: %1</translation>
     </message>
@@ -3515,7 +3515,7 @@ Ez egy új, kísérleti mód. Ha úgy dönt, hogy használja, akkor jelezze nek�
     <message>
         <location filename="../src/libsync/owncloudpropagator.cpp" line="1132"/>
         <source>Error updating metadata due to invalid modified time</source>
-        <translation type="unfinished"/>
+        <translation>Hiba a metaadatok frissítésekor, mert a módosítás ideje érvénytelen</translation>
     </message>
     <message>
         <location filename="../src/libsync/owncloudpropagator.cpp" line="1148"/>
@@ -3601,7 +3601,7 @@ Ez egy új, kísérleti mód. Ha úgy dönt, hogy használja, akkor jelezze nek�
         <location filename="../src/libsync/propagatedownload.cpp" line="1080"/>
         <location filename="../src/libsync/propagatedownload.cpp" line="1093"/>
         <source>File %1 has invalid modified time reported by server. Do not save it.</source>
-        <translation type="unfinished"/>
+        <translation>A(z) %1 fájl módosítási ideje a kiszolgáló szerint érvénytelen. Ne mentse el.</translation>
     </message>
     <message>
         <location filename="../src/libsync/propagatedownload.cpp" line="1218"/>
@@ -3813,15 +3813,16 @@ Ez egy új, kísérleti mód. Ha úgy dönt, hogy használja, akkor jelezze nek�
         <translation>A(z) %1 feltöltése túllépi a mappa kvótáját</translation>
     </message>
     <message>
+        <location filename="../src/libsync/propagateupload.cpp" line="320"/>
+        <location filename="../src/libsync/propagateupload.cpp" line="395"/>
+        <location filename="../src/libsync/propagateupload.cpp" line="408"/>
+        <source>File %1 has invalid modified time. Do not upload to the server.</source>
+        <translation>A(z) %1 fájl módosítási ideje érvénytelen. Ne töltse fel a kiszolgálóra.</translation>
+    </message>
+    <message>
         <location filename="../src/libsync/propagateupload.cpp" line="392"/>
         <source>File Removed (start upload) %1</source>
         <translation>Fájl eltávolítva (feltöltés indítása) %1</translation>
-    </message>
-    <message>
-        <location filename="../src/libsync/propagateupload.cpp" line="396"/>
-        <location filename="../src/libsync/propagateupload.cpp" line="409"/>
-        <source>Local file has invalid modified time. Do not upload to the server.</source>
-        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/libsync/propagateupload.cpp" line="418"/>
@@ -5307,7 +5308,7 @@ Ez egy új, kísérleti mód. Ha úgy dönt, hogy használja, akkor jelezze nek�
         <location filename="../src/libsync/vfs/suffix/vfs_suffix.cpp" line="72"/>
         <location filename="../src/libsync/vfs/suffix/vfs_suffix.cpp" line="82"/>
         <source>Error updating metadata due to invalid modified time</source>
-        <translation type="unfinished"/>
+        <translation>Hiba a metaadatok frissítésekor, mert a módosítás ideje érvénytelen</translation>
     </message>
 </context>
 <context>
@@ -5316,7 +5317,7 @@ Ez egy új, kísérleti mód. Ha úgy dönt, hogy használja, akkor jelezze nek�
         <location filename="../src/libsync/vfs/xattr/vfs_xattr.cpp" line="73"/>
         <location filename="../src/libsync/vfs/xattr/vfs_xattr.cpp" line="83"/>
         <source>Error updating metadata due to invalid modified time</source>
-        <translation type="unfinished"/>
+        <translation>Hiba a metaadatok frissítésekor, mert a módosítás ideje érvénytelen</translation>
     </message>
 </context>
 <context>

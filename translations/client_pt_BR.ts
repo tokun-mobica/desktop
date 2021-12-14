@@ -891,38 +891,38 @@ Esta ação irá cancelar qualquer sincronização atualmente em execução.</tr
         <translation>Arquivo removido (iniciar envio) %1</translation>
     </message>
     <message>
-        <location filename="../src/libsync/bulkpropagatorjob.cpp" line="279"/>
-        <source>Local file has invalid modified time. Do not upload to the server.</source>
-        <translation type="unfinished"/>
+        <location filename="../src/libsync/bulkpropagatorjob.cpp" line="280"/>
+        <source>File %1 has invalid modified time. Do not upload to the server.</source>
+        <translation>O arquivo %1 possui data/hora de modificação inválida. Não enviar ao servidor.</translation>
     </message>
     <message>
-        <location filename="../src/libsync/bulkpropagatorjob.cpp" line="284"/>
+        <location filename="../src/libsync/bulkpropagatorjob.cpp" line="286"/>
         <source>Local file changed during syncing. It will be resumed.</source>
         <translation>Arquivo local alterado durante a sincronização. Será retomado.</translation>
     </message>
     <message>
-        <location filename="../src/libsync/bulkpropagatorjob.cpp" line="295"/>
-        <location filename="../src/libsync/bulkpropagatorjob.cpp" line="621"/>
+        <location filename="../src/libsync/bulkpropagatorjob.cpp" line="298"/>
+        <location filename="../src/libsync/bulkpropagatorjob.cpp" line="624"/>
         <source>Local file changed during sync.</source>
         <translation>Arquivo local alterado durante a sincronização.</translation>
     </message>
     <message>
-        <location filename="../src/libsync/bulkpropagatorjob.cpp" line="425"/>
+        <location filename="../src/libsync/bulkpropagatorjob.cpp" line="428"/>
         <source>Error updating metadata: %1</source>
         <translation>Erro ao atualizar metadados: %1</translation>
     </message>
     <message>
-        <location filename="../src/libsync/bulkpropagatorjob.cpp" line="428"/>
+        <location filename="../src/libsync/bulkpropagatorjob.cpp" line="431"/>
         <source>The file %1 is currently in use</source>
         <translation>O arquivo %1 está atualmente em uso</translation>
     </message>
     <message>
-        <location filename="../src/libsync/bulkpropagatorjob.cpp" line="604"/>
+        <location filename="../src/libsync/bulkpropagatorjob.cpp" line="607"/>
         <source>The local file was removed during sync.</source>
         <translation>O arquivo local foi removido durante a sincronização.</translation>
     </message>
     <message>
-        <location filename="../src/libsync/bulkpropagatorjob.cpp" line="651"/>
+        <location filename="../src/libsync/bulkpropagatorjob.cpp" line="654"/>
         <source>; Restoration Failed: %1</source>
         <translation>; A restauração falhou: %1</translation>
     </message>
@@ -3513,7 +3513,7 @@ Este é um novo modo experimental. Se você decidir usá-lo, relate quaisquer pr
     <message>
         <location filename="../src/libsync/owncloudpropagator.cpp" line="1132"/>
         <source>Error updating metadata due to invalid modified time</source>
-        <translation type="unfinished"/>
+        <translation>Erro ao atualizar os metadados devido a erro na data/hora modificada</translation>
     </message>
     <message>
         <location filename="../src/libsync/owncloudpropagator.cpp" line="1148"/>
@@ -3599,7 +3599,7 @@ Este é um novo modo experimental. Se você decidir usá-lo, relate quaisquer pr
         <location filename="../src/libsync/propagatedownload.cpp" line="1080"/>
         <location filename="../src/libsync/propagatedownload.cpp" line="1093"/>
         <source>File %1 has invalid modified time reported by server. Do not save it.</source>
-        <translation type="unfinished"/>
+        <translation>O arquivo %1 possui erro na data/hora modificada informado pelo servidor. Não salvar.</translation>
     </message>
     <message>
         <location filename="../src/libsync/propagatedownload.cpp" line="1218"/>
@@ -3811,15 +3811,16 @@ Este é um novo modo experimental. Se você decidir usá-lo, relate quaisquer pr
         <translation>O envio de %1 excede a cota para a pasta</translation>
     </message>
     <message>
+        <location filename="../src/libsync/propagateupload.cpp" line="320"/>
+        <location filename="../src/libsync/propagateupload.cpp" line="395"/>
+        <location filename="../src/libsync/propagateupload.cpp" line="408"/>
+        <source>File %1 has invalid modified time. Do not upload to the server.</source>
+        <translation>O arquivo %1 possui data/hora de modificação inválida. Não enviar ao servidor.</translation>
+    </message>
+    <message>
         <location filename="../src/libsync/propagateupload.cpp" line="392"/>
         <source>File Removed (start upload) %1</source>
         <translation>Arquivo Removido (iniciar envio) %1</translation>
-    </message>
-    <message>
-        <location filename="../src/libsync/propagateupload.cpp" line="396"/>
-        <location filename="../src/libsync/propagateupload.cpp" line="409"/>
-        <source>Local file has invalid modified time. Do not upload to the server.</source>
-        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/libsync/propagateupload.cpp" line="418"/>
@@ -5305,7 +5306,7 @@ Este é um novo modo experimental. Se você decidir usá-lo, relate quaisquer pr
         <location filename="../src/libsync/vfs/suffix/vfs_suffix.cpp" line="72"/>
         <location filename="../src/libsync/vfs/suffix/vfs_suffix.cpp" line="82"/>
         <source>Error updating metadata due to invalid modified time</source>
-        <translation type="unfinished"/>
+        <translation>Erro ao atualizar os metadados devido a erro na data/hora modificada</translation>
     </message>
 </context>
 <context>
@@ -5314,7 +5315,7 @@ Este é um novo modo experimental. Se você decidir usá-lo, relate quaisquer pr
         <location filename="../src/libsync/vfs/xattr/vfs_xattr.cpp" line="73"/>
         <location filename="../src/libsync/vfs/xattr/vfs_xattr.cpp" line="83"/>
         <source>Error updating metadata due to invalid modified time</source>
-        <translation type="unfinished"/>
+        <translation>Erro ao atualizar os metadados devido a erro na data/hora modificada</translation>
     </message>
 </context>
 <context>
