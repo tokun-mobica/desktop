@@ -392,6 +392,7 @@ void ShareDialog::slotDeleteShare()
     auto sharelinkWidget = dynamic_cast<ShareLinkWidget*>(sender());
     sharelinkWidget->hide();
     _ui->verticalLayout->removeWidget(sharelinkWidget);
+    _scrollAreaLayout->removeWidget(sharelinkWidget);
     _linkWidgetList.removeAll(sharelinkWidget);
     initLinkShareWidget();
     slotAdjustScrollWidgetSize();
