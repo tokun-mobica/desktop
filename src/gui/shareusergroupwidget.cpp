@@ -254,8 +254,7 @@ void ShareUserGroupWidget::slotSharesFetched(const QList<QSharedPointer<Share>> 
 
     ShareUserLine *justCreatedShareThatNeedsPassword = nullptr;
        
-    QLayoutItem *shareUserLine;
-    while ((shareUserLine = _shareUserGroup->takeAt(0)) != nullptr) {
+    while (QLayoutItem *shareUserLine = _shareUserGroup->takeAt(0)) {
         delete shareUserLine->widget();
         delete shareUserLine;
     }

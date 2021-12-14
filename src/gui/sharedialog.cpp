@@ -159,10 +159,9 @@ ShareDialog::ShareDialog(QPointer<AccountState> accountState,
 
 ShareLinkWidget *ShareDialog::addLinkShareWidget(const QSharedPointer<LinkShare> &linkShare)
 {
-    _linkWidgetList.append(new ShareLinkWidget(_accountState->account(), _sharePath, _localPath, _maxSharingPermissions, _ui->scrollArea));
-    
-    const auto index = _linkWidgetList.size() - 1;
-    const auto linkShareWidget = _linkWidgetList.at(index);
+    const auto linkShareWidget = new ShareLinkWidget(_accountState->account(), _sharePath, _localPath, _maxSharingPermissions, _ui->scrollArea);
+    _linkWidgetList.append(linkShareWidget);
+
     linkShareWidget->setLinkShare(linkShare);
 
     connect(linkShare.data(), &Share::serverError, linkShareWidget, &ShareLinkWidget::slotServerError);
@@ -249,7 +248,7 @@ void ShareDialog::slotSharesFetched(const QList<QSharedPointer<Share>> &shares)
 void ShareDialog::slotAdjustScrollWidgetSize()
 {
     const auto count = _scrollAreaLayout->count();
-    const auto height = _linkWidgetList.size() > 0 ? _linkWidgetList.at(_linkWidgetList.size() - 1)->sizeHint().height() : 0;
+    const auto height = _linkWidgetList.size() > 0 ? _linkWidgetList.last()->sizeHint().height() : 0;
     _ui->scrollArea->setFixedWidth(_ui->verticalLayout->sizeHint().width());
     _ui->scrollArea->setFixedHeight(height * count);
     _ui->scrollArea->setVisible(height > 0);
