@@ -61,11 +61,21 @@ public:
         SyncFileItemType
     };
 
+    struct RichSubjectParameter {
+        QString type;    // Required
+        QString id;      // Required
+        QString name;    // Required
+        QString path;    // Required (for files only)
+        QUrl link;    // Optional (files only)
+    };
+
     Type _type;
     qlonglong _id;
     QString _fileAction;
     QString _objectType;
     QString _subject;
+    QString _subjectRich;
+    QHash<QString, RichSubjectParameter> _subjectRichParameters;
     QString _message;
     QString _folder;
     QString _file;

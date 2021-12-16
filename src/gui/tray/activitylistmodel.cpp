@@ -241,8 +241,10 @@ QVariant ActivityListModel::data(const QModelIndex &index, int role) const
             return QVariant();
         }
     }
-    case ActionTextRole:
+    case ActionTextRole: {
         return a._subject;
+        //return a._subjectRichParameters.contains("file") ? a._subjectRichParameters["file"].name : "";//a._subjectRichParameters.size() > 0 ? a._subjectRich.replace(QRegExp("\{*\}"), a._subjectRichParameters[0].name) : "";
+    }
     case ActionTextColorRole:
         return a._id == -1 ? QLatin1String("#808080") : QLatin1String("#222");   // FIXME: This is a temporary workaround for _showMoreActivitiesAvailableEntry
     case MessageRole:
@@ -342,6 +344,29 @@ void ActivityListModel::activitiesReceived(const QJsonDocument &json, int status
         a._link = QUrl(json.value("link").toString());
         a._dateTime = QDateTime::fromString(json.value("datetime").toString(), Qt::ISODate);
         a._icon = json.value("icon").toString();
+
+        auto richSubjectData = json.value("subject_rich").toArray();
+        a._subjectRich = richSubjectData[0].toString(); // String
+        auto parameters = richSubjectData[1].toObject();
+
+        for (auto i = parameters.begin(); i != parameters.end(); i++) {
+            auto parameterJsonObject = i.value().toObject();
+            Activity::RichSubjectParameter parameter = {
+                parameterJsonObject.value("type").toString(),
+                parameterJsonObject.value("id").toString(),
+                parameterJsonObject.value("name").toString(),
+            };
+
+            if(parameter.type == "file") {
+                parameter.path = parameterJsonObject.value("path").toString();
+
+                if(parameterJsonObject.contains("link")) {
+                    parameter.link = QUrl(parameterJsonObject.value("link").toString());
+                }
+            }
+
+            a._subjectRichParameters[i.key()] = parameter;
+        }
 
         list.append(a);
         _currentItem = list.last()._id;
