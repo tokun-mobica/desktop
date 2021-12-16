@@ -217,7 +217,7 @@ void ShareDialog::slotAddLinkShareWidget(const QSharedPointer<LinkShare> &linkSh
     emit toggleShareLinkAnimation(true);
     const auto addedLinkShareWidget = addLinkShareWidget(linkShare);
     initLinkShareWidget();
-    slotAdjustScrollWidgetSize();
+    adjustScrollWidgetSize();
     if (linkShare->isPasswordSet()) {
         addedLinkShareWidget->focusPasswordLineEdit();
     }
@@ -241,11 +241,11 @@ void ShareDialog::slotSharesFetched(const QList<QSharedPointer<Share>> &shares)
     }
 
     initLinkShareWidget();
-    slotAdjustScrollWidgetSize();
+    adjustScrollWidgetSize();
     emit toggleShareLinkAnimation(false);
 }
 
-void ShareDialog::slotAdjustScrollWidgetSize()
+void ShareDialog::adjustScrollWidgetSize()
 {
     const auto count = _scrollAreaLayout->count();
     const auto margin = 10;
@@ -397,7 +397,7 @@ void ShareDialog::slotDeleteShare()
     _scrollAreaLayout->removeWidget(sharelinkWidget);
     _linkWidgetList.removeAll(sharelinkWidget);
     initLinkShareWidget();
-    slotAdjustScrollWidgetSize();
+    adjustScrollWidgetSize();
 }
 
 void ShareDialog::slotThumbnailFetched(const int &statusCode, const QByteArray &reply)

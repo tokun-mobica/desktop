@@ -67,8 +67,7 @@ private slots:
     void slotCreateLinkShare();
     void slotCreatePasswordForLinkShare(const QString &password);
     void slotCreatePasswordForLinkShareProcessed();
-    void slotLinkShareRequiresPassword();
-    void slotAdjustScrollWidgetSize();
+    void slotLinkShareRequiresPassword();    
 
 signals:
     void toggleShareLinkAnimation(bool start);
@@ -81,6 +80,7 @@ private:
     void showSharingUi();
     ShareLinkWidget *addLinkShareWidget(const QSharedPointer<LinkShare> &linkShare);
     void initLinkShareWidget();
+    void adjustScrollWidgetSize();
 
     Ui::ShareDialog *_ui;
 
