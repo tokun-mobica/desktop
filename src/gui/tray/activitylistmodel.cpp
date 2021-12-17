@@ -242,8 +242,23 @@ QVariant ActivityListModel::data(const QModelIndex &index, int role) const
         }
     }
     case ActionTextRole: {
-        return a._subject;
-        //return a._subjectRichParameters.contains("file") ? a._subjectRichParameters["file"].name : "";//a._subjectRichParameters.size() > 0 ? a._subjectRich.replace(QRegExp("\{*\}"), a._subjectRichParameters[0].name) : "";
+        if(a._subjectRich.isEmpty()) {
+            return a._subject;
+        }
+
+        QString subject = a._subjectRich;
+        QRegularExpression re("({[a-zA-Z0-9]*})");
+        QRegularExpressionMatchIterator i = re.globalMatch(a._subjectRich);
+
+        while (i.hasNext()) {
+            QRegularExpressionMatch match = i.next();
+            QString word = match.captured(1);
+            word.remove(QRegularExpression("[{}]"));
+
+            Q_ASSERT(a._subjectRichParameters.contains(word));
+            subject = subject.replace(match.captured(1), a._subjectRichParameters[word].name);
+        }
+        return subject;
     }
     case ActionTextColorRole:
         return a._id == -1 ? QLatin1String("#808080") : QLatin1String("#222");   // FIXME: This is a temporary workaround for _showMoreActivitiesAvailableEntry
