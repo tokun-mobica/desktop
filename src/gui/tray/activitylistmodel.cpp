@@ -358,6 +358,8 @@ void ActivityListModel::activitiesReceived(const QJsonDocument &json, int status
                 parameterJsonObject.value("type").toString(),
                 parameterJsonObject.value("id").toString(),
                 parameterJsonObject.value("name").toString(),
+                QString(),
+                QUrl(),
             };
 
             if(parameter.type == "file") {
