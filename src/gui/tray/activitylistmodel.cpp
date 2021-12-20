@@ -247,13 +247,12 @@ QVariant ActivityListModel::data(const QModelIndex &index, int role) const
         }
 
         QString subject = a._subjectRich;
-        QRegularExpression re("({[a-zA-Z0-9]*})");
-        QRegularExpressionMatchIterator i = re.globalMatch(a._subjectRich);
+        QRegularExpressionMatchIterator i = _subjectRichParameterRe.globalMatch(a._subjectRich);
 
         while (i.hasNext()) {
             QRegularExpressionMatch match = i.next();
             QString word = match.captured(1);
-            word.remove(QRegularExpression("[{}]"));
+            word.remove(_subjectRichParameterBracesRe);
 
             Q_ASSERT(a._subjectRichParameters.contains(word));
             subject = subject.replace(match.captured(1), a._subjectRichParameters[word].name);

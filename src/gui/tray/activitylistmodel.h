@@ -138,6 +138,9 @@ private:
     bool _currentlyFetching = false;
     bool _doneFetching = false;
     bool _hideOldActivities = true;
+
+    QRegularExpression _subjectRichParameterRe = QRegularExpression("({[a-zA-Z0-9]*})");
+    QRegularExpression _subjectRichParameterBracesRe = QRegularExpression("[{}]");
 };
 }
 
