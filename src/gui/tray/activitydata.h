@@ -76,6 +76,7 @@ public:
     QString _subject;
     QString _subjectRich;
     QHash<QString, RichSubjectParameter> _subjectRichParameters;
+    QString _subjectDisplay;
     QString _message;
     QString _folder;
     QString _file;

@@ -242,22 +242,11 @@ QVariant ActivityListModel::data(const QModelIndex &index, int role) const
         }
     }
     case ActionTextRole: {
-        if(a._subjectRich.isEmpty()) {
+        if(a._subjectDisplay.isEmpty()) {
             return a._subject;
         }
 
-        QString subject = a._subjectRich;
-        QRegularExpressionMatchIterator i = _subjectRichParameterRe.globalMatch(a._subjectRich);
-
-        while (i.hasNext()) {
-            QRegularExpressionMatch match = i.next();
-            QString word = match.captured(1);
-            word.remove(_subjectRichParameterBracesRe);
-
-            Q_ASSERT(a._subjectRichParameters.contains(word));
-            subject = subject.replace(match.captured(1), a._subjectRichParameters[word].name);
-        }
-        return subject;
+        return a._subjectDisplay;
     }
     case ActionTextColorRole:
         return a._id == -1 ? QLatin1String("#808080") : QLatin1String("#222");   // FIXME: This is a temporary workaround for _showMoreActivitiesAvailableEntry
@@ -380,6 +369,22 @@ void ActivityListModel::activitiesReceived(const QJsonDocument &json, int status
             }
 
             a._subjectRichParameters[i.key()] = parameter;
+        }
+
+        if(!a._subjectRich.isEmpty()) {
+            QString subject = a._subjectRich;
+            QRegularExpressionMatchIterator i = _subjectRichParameterRe.globalMatch(a._subjectRich);
+
+            while (i.hasNext()) {
+                QRegularExpressionMatch match = i.next();
+                QString word = match.captured(1);
+                word.remove(_subjectRichParameterBracesRe);
+
+                Q_ASSERT(a._subjectRichParameters.contains(word));
+                subject = subject.replace(match.captured(1), a._subjectRichParameters[word].name);
+            }
+
+            a._subjectDisplay = subject;
         }
 
         list.append(a);
