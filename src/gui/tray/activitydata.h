@@ -74,7 +74,6 @@ public:
     QString _fileAction;
     QString _objectType;
     QString _subject;
-    QString _subjectRich;
     QHash<QString, RichSubjectParameter> _subjectRichParameters;
     QString _subjectDisplay;
     QString _message;

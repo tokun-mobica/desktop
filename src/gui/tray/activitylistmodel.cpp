@@ -241,13 +241,12 @@ QVariant ActivityListModel::data(const QModelIndex &index, int role) const
             return QVariant();
         }
     }
-    case ActionTextRole: {
+    case ActionTextRole:
         if(a._subjectDisplay.isEmpty()) {
             return a._subject;
         }
 
         return a._subjectDisplay;
-    }
     case ActionTextColorRole:
         return a._id == -1 ? QLatin1String("#808080") : QLatin1String("#222");   // FIXME: This is a temporary workaround for _showMoreActivitiesAvailableEntry
     case MessageRole:
@@ -349,11 +348,11 @@ void ActivityListModel::activitiesReceived(const QJsonDocument &json, int status
         a._icon = json.value("icon").toString();
 
         auto richSubjectData = json.value("subject_rich").toArray();
-        a._subjectRich = richSubjectData[0].toString(); // String
+        auto subjectRich = richSubjectData[0].toString();
         auto parameters = richSubjectData[1].toObject();
 
         for (auto i = parameters.begin(); i != parameters.end(); i++) {
-            auto parameterJsonObject = i.value().toObject();
+            const auto parameterJsonObject = i.value().toObject();
             Activity::RichSubjectParameter parameter = {
                 parameterJsonObject.value("type").toString(),
                 parameterJsonObject.value("id").toString(),
@@ -364,29 +363,28 @@ void ActivityListModel::activitiesReceived(const QJsonDocument &json, int status
 
             if(parameter.type == "file") {
                 parameter.path = parameterJsonObject.value("path").toString();
+            }
 
-                if(parameterJsonObject.contains("link")) {
-                    parameter.link = QUrl(parameterJsonObject.value("link").toString());
-                }
+            if(parameter.type == "file" && parameterJsonObject.contains("link")) {
+                parameter.link = QUrl(parameterJsonObject.value("link").toString());
             }
 
             a._subjectRichParameters[i.key()] = parameter;
         }
 
-        if(!a._subjectRich.isEmpty()) {
-            QString subject = a._subjectRich;
-            QRegularExpressionMatchIterator i = _subjectRichParameterRe.globalMatch(a._subjectRich);
+        if(!subjectRich.isEmpty()) {
+            QRegularExpressionMatchIterator i = _subjectRichParameterRe.globalMatch(subjectRich);
 
             while (i.hasNext()) {
-                QRegularExpressionMatch match = i.next();
+                const QRegularExpressionMatch match = i.next();
                 QString word = match.captured(1);
                 word.remove(_subjectRichParameterBracesRe);
 
                 Q_ASSERT(a._subjectRichParameters.contains(word));
-                subject = subject.replace(match.captured(1), a._subjectRichParameters[word].name);
+                subjectRich = subjectRich.replace(match.captured(1), a._subjectRichParameters[word].name);
             }
 
-            a._subjectDisplay = subject;
+            a._subjectDisplay = subjectRich;
         }
 
         list.append(a);
