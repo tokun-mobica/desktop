@@ -77,6 +77,7 @@ public slots:
 
 protected slots:
     void slotAddFolder();
+    void slotRenameFolder();
     void slotEnableCurrentFolder(bool terminate = false);
     void slotScheduleCurrentFolder();
     void slotScheduleCurrentFolderForceRemoteDiscovery();
