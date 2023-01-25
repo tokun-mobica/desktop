@@ -44,6 +44,7 @@ public:
         SystemScope };
 
     QString configPath() const;
+    QString localConfigFile() const;
     QString configFile() const;
     QString excludeFile(Scope scope) const;
     static QString excludeFileFromSystem(); // doesn't access config dir
@@ -202,6 +203,8 @@ public:
     /**  Returns a new settings pre-set in a specific group.  The Settings will be created
          with the given parent. If no parent is specified, the caller must destroy the settings */
     static std::unique_ptr<QSettings> settingsWithGroup(const QString &group, QObject *parent = nullptr);
+
+    static std::unique_ptr<QSettings> localSettings(QObject *parent = nullptr);
 
     /// Add the system and user exclude file path to the ExcludedFiles instance.
     static void setupDefaultExcludeFilePaths(ExcludedFiles &excludedFiles);

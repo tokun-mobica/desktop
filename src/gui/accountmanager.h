@@ -84,8 +84,8 @@ public:
 
 private:
     // saving and loading Account to settings
-    void saveAccountHelper(Account *account, QSettings &settings, bool saveCredentials = true);
-    AccountPtr loadAccountHelper(QSettings &settings);
+    void saveAccountHelper(Account *account, QSettings &settings, QSettings &localData, bool saveCredentials = true);
+    AccountPtr loadAccountHelper(QSettings &settings, QSettings &localData);
 
     bool restoreFromLegacySettings();
 

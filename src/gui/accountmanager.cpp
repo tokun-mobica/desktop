@@ -83,7 +83,7 @@ bool AccountManager::restore()
     for (const auto &accountId : settings->childGroups()) {
         settings->beginGroup(accountId);
         if (!skipSettingsKeys.contains(settings->group())) {
-            if (auto acc = loadAccountHelper(*settings)) {
+            if (auto acc = loadAccountHelper(*settings, *ConfigFile::localSettings())) {
                 acc->_id = accountId;
                 if (auto accState = AccountState::loadFromSettings(acc, *settings)) {
                     auto jar = qobject_cast<CookieJar*>(acc->_am->cookieJar());
@@ -170,7 +170,7 @@ bool AccountManager::restoreFromLegacySettings()
 
     // Try to load the single account.
     if (!settings->childKeys().isEmpty()) {
-        if (auto acc = loadAccountHelper(*settings)) {
+        if (auto acc = loadAccountHelper(*settings, *ConfigFile::localSettings())) {
             addAccount(acc);
             return true;
         }
@@ -184,7 +184,7 @@ void AccountManager::save(bool saveCredentials)
     settings->setValue(QLatin1String(versionC), maxAccountsVersion);
     for (const auto &acc : qAsConst(_accounts)) {
         settings->beginGroup(acc->account()->id());
-        saveAccountHelper(acc->account().data(), *settings, saveCredentials);
+        saveAccountHelper(acc->account().data(), *settings, *ConfigFile::localSettings(), saveCredentials);
         acc->writeToSettings(*settings);
         settings->endGroup();
     }
@@ -197,8 +197,9 @@ void AccountManager::saveAccount(Account *a)
 {
     qCDebug(lcAccountManager) << "Saving account" << a->url().toString();
     auto settings = ConfigFile::settingsWithGroup(QLatin1String(accountsC));
+    auto localData = ConfigFile::localSettings();
     settings->beginGroup(a->id());
-    saveAccountHelper(a, *settings, false); // don't save credentials they might not have been loaded yet
+    saveAccountHelper(a, *settings, *localData, false); // don't save credentials they might not have been loaded yet
     settings->endGroup();
 
     settings->sync();
@@ -217,12 +218,12 @@ void AccountManager::saveAccountState(AccountState *a)
     qCDebug(lcAccountManager) << "Saved account state settings, status:" << settings->status();
 }
 
-void AccountManager::saveAccountHelper(Account *acc, QSettings &settings, bool saveCredentials)
+void AccountManager::saveAccountHelper(Account *acc, QSettings &settings, QSettings &localData, bool saveCredentials)
 {
     settings.setValue(QLatin1String(versionC), maxAccountVersion);
     settings.setValue(QLatin1String(urlC), acc->_url.toString());
     settings.setValue(QLatin1String(davUserC), acc->_davUser);
-    settings.setValue(QLatin1String(serverVersionC), acc->_serverVersion);
+    localData.setValue(QLatin1String(serverVersionC), acc->_serverVersion);
     if (acc->_credentials) {
         if (saveCredentials) {
             // Only persist the credentials if the parameter is set, on migration from 1.8.x
@@ -266,7 +267,7 @@ void AccountManager::saveAccountHelper(Account *acc, QSettings &settings, bool s
     }
 }
 
-AccountPtr AccountManager::loadAccountHelper(QSettings &settings)
+AccountPtr AccountManager::loadAccountHelper(QSettings &settings, QSettings &localData)
 {
     auto urlConfig = settings.value(QLatin1String(urlC));
     if (!urlConfig.isValid()) {
@@ -316,7 +317,8 @@ AccountPtr AccountManager::loadAccountHelper(QSettings &settings)
 
     qCInfo(lcAccountManager) << "Account for" << acc->url() << "using auth type" << authType;
 
-    acc->_serverVersion = settings.value(QLatin1String(serverVersionC)).toString();
+    acc->_serverVersion = localData.value(QLatin1String(serverVersionC)).toString();
+
     acc->_davUser = settings.value(QLatin1String(davUserC), "").toString();
 
     // We want to only restore settings for that auth type and the user value
